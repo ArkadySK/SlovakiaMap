@@ -4,11 +4,9 @@ using System.Windows.Media;
 
 namespace SlovakiaMap.Models
 {
-    public class Municipality : INotifyPropertyChanged
+    public class District : INotifyPropertyChanged
     {
-        private Brush mouseOverFill;
         private Brush fill;
-
         public string Name { get; }
         public string Region { get; }
         public string SPZ { get; }
@@ -23,7 +21,7 @@ namespace SlovakiaMap.Models
             }
         }
 
-        public Municipality(string name, string region, string spz, int residentsCount)
+        public District(string name, string region, string spz, int residentsCount)
         {
             Name = name;
             Region = region;

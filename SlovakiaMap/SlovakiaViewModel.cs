@@ -12,11 +12,11 @@ namespace SlovakiaMap
 {
     public class SlovakiaViewModel : INotifyPropertyChanged
     {
-        private Municipality selectedMunicipality;
+        private District selectedMunicipality;
 
-        private Dictionary<string, Municipality> municipatilies = new Dictionary<string, Municipality>();
+        private Dictionary<string, District> municipatilies = new Dictionary<string, District>();
 
-        public Dictionary<string, Municipality> Municipatilies
+        public Dictionary<string, District> Municipatilies
         {
             get => municipatilies;
             set
@@ -24,7 +24,7 @@ namespace SlovakiaMap
                 municipatilies = value;
             }
         }
-        public Municipality SelectedMunicipality
+        public District SelectedMunicipality
         {
             get => selectedMunicipality;
             set
@@ -67,15 +67,15 @@ namespace SlovakiaMap
         {
             var color = System.Windows.Media.Color.FromArgb(255, 50, 50, 50);
 
-            List<Municipality> municipilityList = municipatilies.Values.ToList();
+            List<District> municipilityList = municipatilies.Values.ToList();
             municipilityList = (from m in municipilityList
                                 orderby m.ResidentsCount ascending
                                 select m)
                                 .ToList();
 
-            foreach (Municipality muni in municipilityList)
+            foreach (District muni in municipilityList)
             {
-                color = System.Windows.Media.Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
+                color = Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
                 Brush brush = new SolidColorBrush(color);
                 muni.Fill = brush;
             }
@@ -88,7 +88,7 @@ namespace SlovakiaMap
             var spz = infos[1];
             var kraj = infos[3];
             int obyv = int.Parse(infos[4].Replace(" ", ""));
-            Municipatilies.Add(spz, new Municipality(name, kraj, spz, obyv));
+            Municipatilies.Add(spz, new District(name, kraj, spz, obyv));
         }
     }
 }
