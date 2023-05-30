@@ -6,7 +6,7 @@ namespace SlovakiaMap.Models
 {
     public class District : INotifyPropertyChanged
     {
-        private Brush fill;
+        private Brush fill = Brushes.Gray;
         public string Name { get; }
         public string Region { get; }
         public string SPZ { get; }
@@ -27,7 +27,6 @@ namespace SlovakiaMap.Models
             Region = region;
             SPZ = spz;
             ResidentsCount = residentsCount;
-            Fill = Brushes.Gray;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -12,15 +12,15 @@ namespace SlovakiaMap
 {
     public class SlovakiaViewModel : INotifyPropertyChanged
     {
-        private District selectedDistrict;
+        private District? selectedDistrict;
 
-        private readonly Dictionary<string, District> districts = new Dictionary<string, District>();
+        private readonly Dictionary<string, District> districts = new();
 
         public Dictionary<string, District> Municipatilies
         {
             get => districts;
         }
-        public District SelectedMunicipality
+        public District? SelectedMunicipality
         {
             get => selectedDistrict;
             set
