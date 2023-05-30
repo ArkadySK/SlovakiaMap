@@ -12,24 +12,20 @@ namespace SlovakiaMap
 {
     public class SlovakiaViewModel : INotifyPropertyChanged
     {
-        private District selectedMunicipality;
+        private District selectedDistrict;
 
-        private Dictionary<string, District> municipatilies = new Dictionary<string, District>();
+        private readonly Dictionary<string, District> districts = new Dictionary<string, District>();
 
         public Dictionary<string, District> Municipatilies
         {
-            get => municipatilies;
-            set
-            {
-                municipatilies = value;
-            }
+            get => districts;
         }
         public District SelectedMunicipality
         {
-            get => selectedMunicipality;
+            get => selectedDistrict;
             set
             {
-                selectedMunicipality = value;
+                selectedDistrict = value;
                 NotifyPropertyChanged();
             }
         }
@@ -65,15 +61,15 @@ namespace SlovakiaMap
 
         private void SortMunicipalitiesByResidents()
         {
-            var color = System.Windows.Media.Color.FromArgb(255, 50, 50, 50);
+            var color = Color.FromArgb(255, 50, 50, 50);
 
-            List<District> municipilityList = municipatilies.Values.ToList();
-            municipilityList = (from m in municipilityList
+            List<District> districtsList = districts.Values.ToList();
+            districtsList = (from m in districtsList
                                 orderby m.ResidentsCount ascending
                                 select m)
                                 .ToList();
 
-            foreach (District muni in municipilityList)
+            foreach (District muni in districtsList)
             {
                 color = Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
                 Brush brush = new SolidColorBrush(color);
