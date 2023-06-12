@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="Okenica Slovenskô" Height="950" Width="1400"
         Background="#FF2B2B2B"
-        Loaded="Window_Loaded"
-        >
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -36,9 +35,9 @@
 
         <!-- Extra tlačidlá -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
-            <Button Content="Rozloha"/>
-            <Button Content="Počet obyvateľov"/>
-            <Button Content="Hustota obyvateľov"/>
+            <Button Content="Rozloha" Click="{Binding AreaCommand}"/>
+            <Button Content="Počet obyvateľov" Click="{Binding DensityCountCommand}"/>
+            <Button Content="Hustota obyvateľov" Click="{Binding ResidentsDensityCommand}"/>
         </StackPanel>
 
         <!-- Mapa -->
