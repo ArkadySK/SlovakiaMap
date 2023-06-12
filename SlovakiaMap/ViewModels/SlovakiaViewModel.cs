@@ -1,4 +1,5 @@
 ﻿using SlovakiaMap.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -12,15 +13,11 @@ namespace SlovakiaMap.ViewModels
 {
     public class SlovakiaViewModel : INotifyPropertyChanged
     {
-        private District? selectedDistrict;
-
-        private readonly Dictionary<string, District> districts = new();
-
-        public Dictionary<string, District> Municipatilies
+        public Dictionary<string, District> Districts
         {
             get => districts;
         }
-        public District? SelectedMunicipality
+        public District? SelectedDistrict
         {
             get => selectedDistrict;
             set
@@ -37,9 +34,14 @@ namespace SlovakiaMap.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+        private District? selectedDistrict;
+
+        private readonly Dictionary<string, District> districts = new();
+
         public async Task LoadDistricts(string filePath)
         {
-            Municipatilies.Clear();
+            Districts.Clear();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var file = new StreamReader(filePath, Encoding.GetEncoding("windows-1250"), true);
 
@@ -84,7 +86,7 @@ namespace SlovakiaMap.ViewModels
             var spz = infos[1];
             var kraj = infos[3];
             int obyv = int.Parse(infos[4].Replace(" ", ""));
-            Municipatilies.Add(spz, new District(name, kraj, spz, obyv));
+            Districts.Add(spz, new District(name, kraj, spz, obyv));
         }
     }
 }

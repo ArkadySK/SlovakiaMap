@@ -10,7 +10,7 @@ namespace SlovakiaMap
     /// </summary>
     public partial class Window1 : Window
     {
-        public SlovakiaViewModel Slovakia { get; set; } = new SlovakiaViewModel();
+        public MainViewModel ViewModel { get; set; } = new MainViewModel();
 
         public Window1()
         {
@@ -19,8 +19,8 @@ namespace SlovakiaMap
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await Slovakia.LoadDistricts("SK_Okresy.txt");
-            this.DataContext = Slovakia;
+            await ViewModel.Load("SK_Okresy.txt");
+            this.DataContext = ViewModel;
         }
 
         private void Municipality_MouseEnter(object sender, MouseEventArgs e)
@@ -28,7 +28,7 @@ namespace SlovakiaMap
             if (sender is not Path)
                 return;
             var senderPath = (Path)sender;
-            Slovakia.SelectedMunicipality = Slovakia.Municipatilies[senderPath.Name];
+            ViewModel.Slovakia.SelectedDistrict = ViewModel.Slovakia.Districts[senderPath.Name];
         }
     }
 }
