@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using SlovakiaMap.ViewModels;
 
 namespace SlovakiaMap
 {
