@@ -36,6 +36,7 @@
         <!-- Extra tlačidlá -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
             <Button Content="Rozloha" Command="{Binding AreaCommand}"/>
+            <Button Content="Kraje" Command="{Binding RegionCommand}"/>
             <Button Content="Počet obyvateľov" Command="{Binding ResidentsCountCommand}"/>
             <Button Content="Hustota obyvateľov" Command="{Binding ResidentsDensityCommand}"/>
         </StackPanel>

@@ -15,6 +15,7 @@ namespace SlovakiaMap.ViewModels
     public class MainViewModel
     {
         public ICommand AreaCommand { get; }
+        public ICommand RegionCommand { get; }
         public ICommand ResidentsCountCommand { get; }
         public ICommand ResidentsDensityCommand { get; }
 
@@ -23,6 +24,7 @@ namespace SlovakiaMap.ViewModels
         public MainViewModel()
         {
             AreaCommand = new RelayCommand(Area);
+            RegionCommand = new RelayCommand(Region);
             ResidentsCountCommand = new RelayCommand(ResidentsCount);
             ResidentsDensityCommand = new RelayCommand(ResidentsDensity);
             Slovakia = new SlovakiaViewModel();
@@ -35,17 +37,22 @@ namespace SlovakiaMap.ViewModels
 
         private void Area()
         {
+            Slovakia.SortDistrictsByArea();
+        }
 
+        private void Region()
+        {
+            Slovakia.SortDistrictsByRegion();
         }
 
         private void ResidentsCount()
         {
-
+            Slovakia.SortDistrictsByResidents();
         }
 
         private void ResidentsDensity()
         {
-
+            Slovakia.SortDistrictsByDensity();
         }
     }
 }
