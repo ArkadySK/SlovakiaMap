@@ -34,7 +34,6 @@ namespace SlovakiaMap.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
         private District? selectedDistrict;
 
         private readonly Dictionary<string, District> districts = new();
@@ -57,11 +56,48 @@ namespace SlovakiaMap.ViewModels
             }
             file.Close();
             await Task.CompletedTask;
-
-            SortDistrictsByResidents();
         }
 
-        private void SortDistrictsByResidents()
+        public void SortByArea()
+        {
+            var color = Color.FromArgb(255, 50, 250, 250);
+
+            List<District> districtsList = districts.Values.ToList();
+            districtsList = (from m in districtsList
+                             orderby m.Area ascending
+                             select m)
+                                .ToList();
+
+            foreach (District dist in districtsList)
+            {
+                color = Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
+                Brush brush = new SolidColorBrush(color);
+                dist.Fill = brush;
+            }
+        }
+
+        public void SortByRegion()
+        {
+            var color = Color.FromArgb(255, 50, 50, 255);
+
+            List<District> districtsList = districts.Values.ToList();
+            districtsList = (from m in districtsList
+                             orderby m.Region ascending
+                             select m)
+                                .ToList();
+
+            var prevRegion = "";
+            foreach (District dist in districtsList)
+            {
+                if (dist.Region != prevRegion)
+                    color = Color.FromArgb(color.A, color.R, (byte)(color.G + 25), color.B);
+                Brush brush = new SolidColorBrush(color);
+                dist.Fill = brush;
+                prevRegion = dist.Region;
+            }
+        }
+
+        public void SortByResidentsCount()
         {
             var color = Color.FromArgb(255, 50, 50, 50);
 
@@ -74,6 +110,24 @@ namespace SlovakiaMap.ViewModels
             foreach (District dist in districtsList)
             {
                 color = Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
+                Brush brush = new SolidColorBrush(color);
+                dist.Fill = brush;
+            }
+        }
+
+        public void SortByResidentsDensity()
+        {
+            var color = Color.FromArgb(255, 50, 50, 50);
+
+            List<District> districtsList = districts.Values.ToList();
+            districtsList = (from m in districtsList
+                             orderby m.ResidentsDensity ascending
+                             select m)
+                                .ToList();
+
+            foreach (District dist in districtsList)
+            {
+                color = Color.FromArgb(color.A, color.R, color.G, (byte)(color.B + 2));
                 Brush brush = new SolidColorBrush(color);
                 dist.Fill = brush;
             }

@@ -37,22 +37,22 @@ namespace SlovakiaMap.ViewModels
 
         private void Area()
         {
-            Slovakia.SortDistrictsByArea();
+            Slovakia.SortByArea();
         }
 
         private void Region()
         {
-            Slovakia.SortDistrictsByRegion();
+            Slovakia.SortByRegion();
         }
 
         private void ResidentsCount()
         {
-            Slovakia.SortDistrictsByResidents();
+            Slovakia.SortByResidentsCount();
         }
 
         private void ResidentsDensity()
         {
-            Slovakia.SortDistrictsByDensity();
+            Slovakia.SortByResidentsDensity();
         }
     }
 }
