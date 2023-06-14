@@ -18,7 +18,7 @@ namespace SlovakiaMap.ViewModels
         public ICommand ResidentsCountCommand { get; }
         public ICommand ResidentsDensityCommand { get; }
 
-        public SlovakiaViewModel Slovakia { get; } //TODO: get only?
+        public SlovakiaViewModel Slovakia { get; }
 
         public MainViewModel()
         {
