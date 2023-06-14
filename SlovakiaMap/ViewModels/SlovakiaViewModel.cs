@@ -58,10 +58,10 @@ namespace SlovakiaMap.ViewModels
             file.Close();
             await Task.CompletedTask;
 
-            SortMunicipalitiesByResidents();
+            SortDistrictsByResidents();
         }
 
-        private void SortMunicipalitiesByResidents()
+        private void SortDistrictsByResidents()
         {
             var color = Color.FromArgb(255, 50, 50, 50);
 
@@ -71,11 +71,11 @@ namespace SlovakiaMap.ViewModels
                              select m)
                                 .ToList();
 
-            foreach (District muni in districtsList)
+            foreach (District dist in districtsList)
             {
                 color = Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
                 Brush brush = new SolidColorBrush(color);
-                muni.Fill = brush;
+                dist.Fill = brush;
             }
         }
 
