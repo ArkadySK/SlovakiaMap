@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Printing;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
@@ -10,7 +11,12 @@ namespace SlovakiaMap.Models
         public string Name { get; }
         public string Region { get; }
         public string SPZ { get; }
+        public double Area { get; }
         public int ResidentsCount { get; }
+        public double ResidentsDensity
+        {
+            get => Area / ResidentsCount;
+        }
         public Brush Fill
         {
             get => fill;
@@ -21,11 +27,12 @@ namespace SlovakiaMap.Models
             }
         }
 
-        public District(string name, string region, string spz, int residentsCount)
+        public District(string name, string region, string spz, double area, int residentsCount)
         {
             Name = name;
             Region = region;
             SPZ = spz;
+            Area = area;
             ResidentsCount = residentsCount;
         }
 
