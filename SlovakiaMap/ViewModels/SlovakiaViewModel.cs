@@ -44,7 +44,6 @@ namespace SlovakiaMap.ViewModels
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var file = new StreamReader(filePath, Encoding.GetEncoding("windows-1250"), true);
 
-            //var color = Colors.Gray;
             string data = await file.ReadToEndAsync();
             foreach (string line in data.Split("\n"))
             {
@@ -55,6 +54,7 @@ namespace SlovakiaMap.ViewModels
                 catch { }
             }
             file.Close();
+
             await Task.CompletedTask;
         }
 
@@ -117,7 +117,7 @@ namespace SlovakiaMap.ViewModels
 
         public void SortByResidentsDensity()
         {
-            var color = Color.FromArgb(255, 50, 50, 50);
+            var color = Color.FromArgb(255, 100, 100, 10);
 
             List<District> districtsList = districts.Values.ToList();
             districtsList = (from m in districtsList
@@ -140,7 +140,8 @@ namespace SlovakiaMap.ViewModels
             var spz = infos[1];
             var kraj = infos[3];
             int obyv = int.Parse(infos[4].Replace(" ", ""));
-            Districts.Add(spz, new District(name, kraj, spz, obyv));
+            double area = double.Parse(infos[6].Replace(" ", ""));
+            Districts.Add(spz, new District(name, kraj, spz, area, obyv));
         }
     }
 }
