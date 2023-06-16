@@ -27,6 +27,11 @@ namespace SlovakiaMap.ViewModels
             }
         }
 
+        public List<District> DistrictsList
+        {
+            get => Districts.Values.ToList();
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -56,48 +61,6 @@ namespace SlovakiaMap.ViewModels
             file.Close();
 
             await Task.CompletedTask;
-        }
-
-        public void SortDistrictByProperty(string propertyName)
-        {
-            List<District> districtsList = districts.Values.ToList();
-            dynamic? max = districtsList.Max(d => ReflectionTools.GetPropValue(d, propertyName));
-            if (max is null)
-                return;
-
-            foreach (District dist in districtsList)
-            {
-                dynamic? prop = ReflectionTools.GetPropValue(dist, propertyName);
-                if (prop is null) continue;
-
-                var col = (byte)(prop * 255 / max);
-                Color color = Color.FromArgb(255, 50, 50, 50);
-
-                color = Color.FromArgb(color.A, col, color.G, color.B);
-                Brush brush = new SolidColorBrush(color);
-                dist.Fill = brush;
-            }
-        }
-
-        public void SortByRegion()
-        {
-            var color = Color.FromArgb(255, 50, 50, 255);
-
-            List<District> districtsList = districts.Values.ToList();
-            districtsList = (from m in districtsList
-                             orderby m.Region ascending
-                             select m)
-                                .ToList();
-
-            var prevRegion = "";
-            foreach (District dist in districtsList)
-            {
-                if (dist.Region != prevRegion)
-                    color = Color.FromArgb(color.A, color.R, (byte)(color.G + 25), color.B);
-                Brush brush = new SolidColorBrush(color);
-                dist.Fill = brush;
-                prevRegion = dist.Region;
-            }
         }
 
         private void CreateDistrict(string lineInfo)
