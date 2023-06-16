@@ -1,5 +1,5 @@
 ﻿using SlovakiaMap.Models;
-using System;
+using SlovakiaMap.Tools;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -58,19 +58,22 @@ namespace SlovakiaMap.ViewModels
             await Task.CompletedTask;
         }
 
-        public void SortByArea()
+        public void SortDistrictByProperty(string propertyName)
         {
-            var color = Color.FromArgb(255, 50, 250, 250);
-
             List<District> districtsList = districts.Values.ToList();
-            districtsList = (from m in districtsList
-                             orderby m.Area ascending
-                             select m)
-                                .ToList();
+            dynamic? max = districtsList.Max(d => ReflectionTools.GetPropValue(d, propertyName));
+            if (max is null)
+                return;
 
             foreach (District dist in districtsList)
             {
-                color = Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
+                dynamic? prop = ReflectionTools.GetPropValue(dist, propertyName);
+                if (prop is null) continue;
+
+                var col = (byte)(prop * 255 / max);
+                Color color = Color.FromArgb(255, 50, 50, 50);
+
+                color = Color.FromArgb(color.A, col, color.G, color.B);
                 Brush brush = new SolidColorBrush(color);
                 dist.Fill = brush;
             }
@@ -94,42 +97,6 @@ namespace SlovakiaMap.ViewModels
                 Brush brush = new SolidColorBrush(color);
                 dist.Fill = brush;
                 prevRegion = dist.Region;
-            }
-        }
-
-        public void SortByResidentsCount()
-        {
-            var color = Color.FromArgb(255, 50, 50, 50);
-
-            List<District> districtsList = districts.Values.ToList();
-            districtsList = (from m in districtsList
-                             orderby m.ResidentsCount ascending
-                             select m)
-                                .ToList();
-
-            foreach (District dist in districtsList)
-            {
-                color = Color.FromArgb(color.A, (byte)(color.R + 2), color.G, color.B);
-                Brush brush = new SolidColorBrush(color);
-                dist.Fill = brush;
-            }
-        }
-
-        public void SortByResidentsDensity()
-        {
-            var color = Color.FromArgb(255, 100, 100, 10);
-
-            List<District> districtsList = districts.Values.ToList();
-            districtsList = (from m in districtsList
-                             orderby m.ResidentsDensity ascending
-                             select m)
-                                .ToList();
-
-            foreach (District dist in districtsList)
-            {
-                color = Color.FromArgb(color.A, color.R, color.G, (byte)(color.B + 2));
-                Brush brush = new SolidColorBrush(color);
-                dist.Fill = brush;
             }
         }
 

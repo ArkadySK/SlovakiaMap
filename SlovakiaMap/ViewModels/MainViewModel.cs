@@ -37,7 +37,7 @@ namespace SlovakiaMap.ViewModels
 
         private void Area()
         {
-            Slovakia.SortByArea();
+            Slovakia.SortDistrictByProperty("Area");
         }
 
         private void Region()
@@ -47,12 +47,12 @@ namespace SlovakiaMap.ViewModels
 
         private void ResidentsCount()
         {
-            Slovakia.SortByResidentsCount();
+            Slovakia.SortDistrictByProperty("ResidentsCount");
         }
 
         private void ResidentsDensity()
         {
-            Slovakia.SortByResidentsDensity();
+            Slovakia.SortDistrictByProperty("ResidentsDensity");
         }
     }
 }
