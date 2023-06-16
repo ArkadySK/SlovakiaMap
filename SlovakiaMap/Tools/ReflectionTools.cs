@@ -8,12 +8,15 @@ namespace SlovakiaMap.Tools
 {
     public class ReflectionTools
     {
-        public static object GetPropValue(object src, string propName)
+        public static object? GetPropValue(object? src, string propName)
         {
-            if (src is null || string.IsNullOrEmpty(propName))
+            Type? type = src?.GetType();
+            if (type == null)
+                throw new ArgumentException("source object is null");
+            if (string.IsNullOrEmpty(propName))
                 throw new ArgumentException("source object or property name is wrong!");
 
-            return src.GetType().GetProperty(propName).GetValue(src, null);
+            return type.GetProperty(propName)?.GetValue(src, null);
         }
     }
 }
