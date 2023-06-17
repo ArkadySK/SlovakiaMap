@@ -15,20 +15,29 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Ovladanie -->
+        <!-- Info -->
         <Viewbox MaxHeight="160" HorizontalAlignment="Left" Margin="10">
             <StackPanel Grid.Row="0" >
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Meno okresu: " VerticalAlignment="Center"/>
-                    <Label FontSize="20" Padding="0" FontWeight="DemiBold" Content="{Binding Slovakia.SelectedDistrict.Name}" HorizontalAlignment="Center"/>
+                    <Label FontSize="20" Padding="0" FontWeight="DemiBold" Background="{Binding Slovakia.SelectedDistrict.Fill}" Content="{Binding Slovakia.SelectedDistrict.Name, FallbackValue='žiadny'}" HorizontalAlignment="Center"/>
+                    <Label Content="(Kraj:"/>
+                    <Label Content="{Binding Slovakia.SelectedDistrict.Region, FallbackValue=-}"/>
+                    <Label Content=")"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Kraj: "/>
-                    <Label Content="{Binding Slovakia.SelectedDistrict.Region}"/>
+                    <Label Content="Počet Obyvateľov:"/>
+                    <Label Content="{Binding Slovakia.SelectedDistrict.ResidentsCount, FallbackValue=0}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Počet Obyvateľov: "/>
-                    <Label Content="{Binding Slovakia.SelectedDistrict.ResidentsCount}" Background="{Binding Slovakia.SelectedDistrict.Fill}"/>
+                    <Label Content="Rozloha:"/>
+                    <Label Content="{Binding Slovakia.SelectedDistrict.Area, FallbackValue=0}"/>
+                    <Label Content="km²"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Hustota Obyvateľov:"/>
+                    <TextBlock Text="{Binding Slovakia.SelectedDistrict.ResidentsDensity, StringFormat=N2, FallbackValue=0.0, Mode=OneWay}"/>
+                    <Label Content="obyv./km²"/>
                 </StackPanel>
             </StackPanel>
         </Viewbox>
