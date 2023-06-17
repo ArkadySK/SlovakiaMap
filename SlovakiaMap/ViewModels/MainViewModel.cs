@@ -55,7 +55,7 @@ namespace SlovakiaMap.ViewModels
 
         private void ResidentsDensity()
         {
-            Sorter.SortDistrictByProperty("ResidentsDensity", Slovakia.DistrictsList);
+            Sorter.SortDistrictByProperty("ReferentialDensity", Slovakia.DistrictsList);
         }
     }
 }

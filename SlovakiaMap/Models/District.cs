@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Printing;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
@@ -15,8 +16,13 @@ namespace SlovakiaMap.Models
         public int ResidentsCount { get; }
         public double ResidentsDensity
         {
-            get => Area / ResidentsCount;
+            get => ((double)ResidentsCount / Area);
         }
+        public double ReferentialDensity
+        {
+            get => Math.Log10((double)ResidentsCount / Area);
+        }
+
         public Brush Fill
         {
             get => fill;
